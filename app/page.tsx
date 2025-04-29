@@ -36,7 +36,7 @@ export default function Home() {
   const [products, setProducts] = useState<any>()
 
   useEffect(() => {
-    fetchData("http://127.0.0.1:8000/products/").then((data) => {
+    fetchData("products/").then((data) => {
       setProducts(data)
     })
   }, [])
@@ -57,7 +57,7 @@ export default function Home() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div className="flex">
+      <div className="flex flex-wrap justify-evenly items-center">
         {
           products && products.map((product:any) => <ProductCard key={product.id} data={product} />)
         }

@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { ModeToggle } from "./components/theme-toggle";
 import Navbar from "./components/navbar";
 import { AuthProvider } from "./providers/AuthProvider";
+import AnnouncementBar from "./components/announcementBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const announcements = [
+    '40% OFF T-shirts'
+  ]
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -38,6 +44,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <AnnouncementBar announcements={announcements} />
             <div className="w-[100%] my-2 pr-5 flex justify-start items-center sticky">
               <Navbar />
             </div>

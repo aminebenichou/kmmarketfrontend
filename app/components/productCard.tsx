@@ -23,7 +23,7 @@ export type product = {
 
 const ProductCard = ({ data }: { data: product }) => {
     return (
-        <div className='mx-2'>
+        <div className='mx-2 my-4'>
             <Link href={data?.id.toString() || ""}>
             <Card className='hover:shadow-xl'>
                 <CardContent className='w-64 h-72 py-5 flex flex-col justify-start items-center'>

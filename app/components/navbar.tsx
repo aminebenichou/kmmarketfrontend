@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className='w-full'>
             <div className='w-[100%] px-5 flex justify-between items-center h-16 sticky top-0 z-50'>
                 <div>
-                    <h3>KM Market</h3>
+                    <img src="./logo.jpeg" alt="" className='w-36 ml-10' />
                 </div>
 
                 <div className='flex justify-evenly items-center'>

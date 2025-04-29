@@ -7,7 +7,7 @@ import { fetchData } from '../requests'
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<any>([])
   useEffect(() => {
-    fetchData("http://127.0.0.1:8000/orders/?status=pending").then((data)=>{setCartItems(data)})
+    fetchData("orders/?status=pending").then((data)=>{setCartItems(data)})
   }, [])
   return (
     <div>
