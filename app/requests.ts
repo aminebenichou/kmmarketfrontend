@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 
 export const fetchData = async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
   try {
-    const response = await axios.get<T>(url, config);
+    const response = await axios.get<T>(`http://127.0.0.1:8000/${url}`, config);
     return response.data;
   } catch (error) {
     console.error('GET request error:', error);
