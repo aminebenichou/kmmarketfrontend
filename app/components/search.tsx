@@ -1,14 +1,23 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { redirect, usePathname, useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 
 const SearchBar = () => {
 
     const [query, setQuery] = useState("")
-
+    const path = usePathname()
+    const searchParams = useSearchParams()
     function search() {
-        console.log(query)
+        if (path==="/products") {
+            const search = searchParams.get('search')
+            search && setQuery(search)
+            redirect(`/products?search=${query}`)
+        }
+        else{
+            redirect(`/products?search=${query}`)
+        }
     }
 
     return (

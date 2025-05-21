@@ -15,7 +15,7 @@ const LoginPage = () => {
         password:''
     })
 
-    function handleLogin(e:any) {
+    function handleLogin(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         login("login/", data).then((data)=>data && redirect("/"))
     }
@@ -36,6 +36,7 @@ const LoginPage = () => {
                                 Login
                             </Button>
                             <p>You don't have an account? <br /> <Link className='font-bold' href="/signup">Sign Up Here</Link> </p>
+                            <p><br /> <Link className='font-bold' href="/seller">Become a Seller</Link> </p>
                         </form>
                     </CardContent>
                 </Card>

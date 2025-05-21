@@ -14,7 +14,7 @@ const SignUpPage = () => {
         password:''
     })
 
-    function handleLogin(e:any) {
+    function handleLogin(e:unknown) {
         e.preventDefault()
         signup("signUp/", data)
     }

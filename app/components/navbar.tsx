@@ -13,7 +13,7 @@ const Navbar = () => {
         { label: "Products", link: "/products" },
         { label: "Contact", link: "/contact" },
     ]
-    const { isAuthenticated, token } = useAuth();
+    const { isAuthenticated } = useAuth();
     const [toggle, setToggle] = useState(false)
     return (
         <div className='w-full'>

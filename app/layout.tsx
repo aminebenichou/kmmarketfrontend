@@ -6,6 +6,8 @@ import { ModeToggle } from "./components/theme-toggle";
 import Navbar from "./components/navbar";
 import { AuthProvider } from "./providers/AuthProvider";
 import AnnouncementBar from "./components/announcementBar";
+import Footer from "./components/footer";
+import ChatBot from "./components/chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,13 +44,15 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem
-            disableTransitionOnChange
+            disabconstransitionOnChange
           >
             <AnnouncementBar announcements={announcements} />
             <div className="w-[100%] my-2 pr-5 flex justify-start items-center sticky">
               <Navbar />
             </div>
             {children}
+            <ChatBot />
+            <Footer />
           </ThemeProvider>
         </AuthProvider>
       </body>

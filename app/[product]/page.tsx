@@ -3,16 +3,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Box, CircleArrowOutUpLeftIcon, Home, MessageCircleIcon, Phone, ShoppingCart, Star, StarHalf, Truck, TvIcon } from 'lucide-react'
+import { Box, CircleArrowOutUpLeftIcon, Home, LucideProps, MessageCircleIcon, Phone, ShoppingCart, Star, StarHalf, Truck, TvIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import ProductCard, { product } from '../components/productCard'
+import ProductCard, { product as Product } from '../components/productCard'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { fetchData } from '../requests'
+import { fetchData, postData } from '../requests'
 import { useParams } from 'next/navigation'
 
 
 
-const IconWithText = ({Icon, text}:{Icon:any, text:string})=>{
+const IconWithText = ({Icon, text}:{Icon:React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>, text:string})=>{
     return(
         <div className="flex items-center space-x-2">
             {
@@ -49,48 +49,17 @@ const ProductPage = () => {
             rating: 5.5,
             description: "string",
             category: "string",
-            seller: "string",
+            seller: {
+                username:''
+            },
             sale: false,
         },
-        {
-            id: "2",
-            image: "./1.jpg",
-            title: "test Product",
-            price: 15000,
-            rating: 5.5,
-            description: "string",
-            category: "string",
-            seller: "string",
-            sale: false,
-        },
-        {
-            id: "3",
-            image: "./1.jpg",
-            title: "test Product",
-            price: 15000,
-            rating: 5.5,
-            description: "string",
-            category: "string",
-            seller: "string",
-            sale: false,
-        },
-        {
-            id: "4",
-            image: "./1.jpg",
-            title: "test Product",
-            price: 15000,
-            rating: 5.5,
-            description: "string",
-            category: "string",
-            seller: "string",
-            sale: false,
-        },
-
+        
     ]
-    const [product, setProduct] = useState<any>()
+    const [product, setProduct] = useState<Product>()
     useEffect(()=>{
-        fetchData(`http://127.0.0.1:8000/products/${productId}`).then((data:any)=>{
-            setProduct(data)
+        fetchData(`products/${productId}`).then((data:unknown)=>{
+            setProduct(data as Product)
         })
     }, [])
     const displayRating = (rating: number) => {
@@ -99,7 +68,7 @@ const ProductPage = () => {
         const hasHalfStar = rating % 1 >= 0.5;
         const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-        for (let i = 0; i < fullStars; i++) {
+        for (var i = 0; i < fullStars; i++) {
             stars.push(<Star key={`full-${i}`} size={24} fill="#FFD700" />);
         }
 
@@ -107,12 +76,19 @@ const ProductPage = () => {
             stars.push(<StarHalf key="half" size={24} fill="#FFD700" />);
         }
 
-        for (let i = 0; i < emptyStars; i++) {
+        for (var i = 0; i < emptyStars; i++) {
             stars.push(<Star key={`empty-${i}`} size={24} fill="none" />);
         }
 
         return stars;
     };
+
+    function createOrder() {
+        postData("orders/", {
+            products: [productId],
+        })
+    }
+
     return (
         <div className='h-full flex w-full py-10'>
             <div className='w-3/4'>
@@ -137,7 +113,7 @@ const ProductPage = () => {
                                 displayRating(product?.rating || 0)
                             }
                         </div>
-                        <Button className='my-10 cursor-pointer'>
+                        <Button onClick={createOrder} className='my-10 cursor-pointer'>
                             <ShoppingCart /> Add To Cart
                         </Button>
                         <div className='my-5 flex'>
