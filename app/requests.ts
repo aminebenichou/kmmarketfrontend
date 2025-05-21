@@ -4,6 +4,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 
 
+const mainUrl = "https://aminebenichou.pythonanywhere.com/"
+
 // ✅ Helper to get token from cookies
 const getToken = async (): Promise<string | undefined> => {
   const cookieStore = await cookies();
@@ -21,7 +23,7 @@ export const fetchData = async <T = unknown>(
   config?: AxiosRequestConfig
 ): Promise<T> => {
   try {
-    const response: AxiosResponse<T> = await axios.get(`http://127.0.0.1:8000/${url}`, config);
+    const response: AxiosResponse<T> = await axios.get(`${mainUrl}${url}`, config);
     return response.data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {
@@ -38,7 +40,7 @@ export const fetchDataWithToken = async <T = unknown>(
 ): Promise<T> => {
   try {
     const token = await getToken();
-    const response: AxiosResponse<T> = await axios.get(`http://127.0.0.1:8000/${url}`, {
+    const response: AxiosResponse<T> = await axios.get(`${mainUrl}${url}`, {
       ...config,
       headers: {
         ...config?.headers,
@@ -63,7 +65,7 @@ export async function login<TRequest, TResponse>(
 
   try {
     const response: AxiosResponse<TResponse & { token: string }> = await axios.post(
-      `http://127.0.0.1:8000/${url}`,
+      `${mainUrl}${url}`,
       data,
       {
         headers: {
@@ -93,7 +95,7 @@ export async function signup<TRequest, TResponse>(
 ): Promise<TResponse> {
   try {
     const response: AxiosResponse<TResponse> = await axios.post(
-      `http://127.0.0.1:8000/${url}`,
+      `${mainUrl}${url}`,
       data,
       {
         headers: {
@@ -121,7 +123,7 @@ export async function postData<TRequest, TResponse>(
 
   try {
     const response: AxiosResponse<TResponse> = await axios.post(
-      `http://127.0.0.1:8000/${url}`,
+      `${mainUrl}${url}`,
       data,
       {
         headers: {
@@ -148,7 +150,7 @@ export const patchRequest = async <TRequest, TResponse>(
 
   try {
     const response: AxiosResponse<TResponse> = await axios.patch(
-      `http://127.0.0.1:8000/${url}`,
+      `${mainUrl}${url}`,
       data,
       {
         headers: {
