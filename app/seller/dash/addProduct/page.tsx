@@ -44,7 +44,7 @@ const AddProductPage = () => {
   useEffect(() => {
     // Fetch category list
     const fetchCategories = async () => {
-      const data : unknown = await fetchData('catgeories/')
+      const data : any = await fetchData('catgeories/')
       console.log(data)
       setCategories(data as Category[])
     }
@@ -69,8 +69,8 @@ const AddProductPage = () => {
     setSelectedCategories(values)
   }
 
-  const formDataToObject = (formData: FormData): Record<string, unknown> => {
-    const obj: Record<string, unknown> = {}
+  const formDataToObject = (formData: FormData): Record<string, any> => {
+    const obj: Record<string, any> = {}
     for (const [key, value] of formData.entries()) {
       obj[key] = value
     }
@@ -96,7 +96,7 @@ const AddProductPage = () => {
       
     }
 
-    var data = formDataToObject(body)
+    const data = formDataToObject(body)
     data.price = parseInt(formData.price.toString())
     data.category = parseInt(selectedCategories[0].toString())
     console.log(data);

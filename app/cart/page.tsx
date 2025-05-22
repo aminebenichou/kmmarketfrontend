@@ -26,7 +26,7 @@ const CartPage = () => {
       headers:{
         'Authorization':`Token ${token}`
       }
-    }).then((data: unknown) => {
+    }).then((data: any) => {
       setCartItems(data as CartItemType[]);
     });
   }, []);

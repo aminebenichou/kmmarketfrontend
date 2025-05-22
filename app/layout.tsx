@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
-import { ModeToggle } from "./components/theme-toggle";
 import Navbar from "./components/navbar";
 import { AuthProvider } from "./providers/AuthProvider";
 import AnnouncementBar from "./components/announcementBar";
@@ -42,9 +41,7 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disabconstransitionOnChange
+            defaultTheme="light"
           >
             <AnnouncementBar announcements={announcements} />
             <div className="w-[100%] my-2 pr-5 flex justify-start items-center sticky">

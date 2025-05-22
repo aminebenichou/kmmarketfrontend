@@ -19,12 +19,12 @@ const ProductsPage = () => {
     const category = searchParams.get("category");
 
     useEffect(() => {
-        fetchData("products/").then((data: unknown) => setProducts(data as Product[] ));
-        fetchData("catgeories/").then((data: unknown) => setCats(data as Category[]));
+        fetchData("products/").then((data: any) => setProducts(data as Product[] ));
+        fetchData("catgeories/").then((data: any) => setCats(data as Category[]));
     }, []);
 
     useEffect(() => {
-        var result = [...products];
+        let result = [...products];
 
         if (search) {
             const lowerSearch = search.toLowerCase();

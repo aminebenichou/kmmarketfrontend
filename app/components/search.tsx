@@ -12,7 +12,9 @@ const SearchBar = () => {
     function search() {
         if (path==="/products") {
             const search = searchParams.get('search')
-            search && setQuery(search)
+            if (search) {
+                setQuery(search);
+            }
             redirect(`/products?search=${query}`)
         }
         else{

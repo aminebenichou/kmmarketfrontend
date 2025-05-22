@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 // ✅ Response type from signup API
 export type SignupResponse = {
   message?: string;
-  [key: string]: unknown; // optional: for any extra fields
+  [key: string]: any; // optional: for any extra fields
 };
 
 // ✅ Form fields type

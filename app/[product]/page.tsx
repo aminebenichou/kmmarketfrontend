@@ -3,10 +3,10 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Box, CircleArrowOutUpLeftIcon, Home, LucideProps, MessageCircleIcon, Phone, ShoppingCart, Star, StarHalf, Truck, TvIcon } from 'lucide-react'
+import { Box, CircleArrowOutUpLeftIcon, LucideProps, MessageCircleIcon, Phone, ShoppingCart, Star, StarHalf, Truck } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import ProductCard, { product as Product } from '../components/productCard'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem,  SelectTrigger, SelectValue } from '@/components/ui/select'
 import { fetchData, postData } from '../requests'
 import { useParams } from 'next/navigation'
 
@@ -27,9 +27,6 @@ const ProductPage = () => {
     const params = useParams()
     const productId = params.product
     
-    
-    const imgUrl = "public/next.svg"
-    var i = 0
     const wilayas = [
         { id: 1, name: "wilaya1" },
         { id: 2, name: "wilaya2" },
@@ -58,7 +55,7 @@ const ProductPage = () => {
     ]
     const [product, setProduct] = useState<Product>()
     useEffect(()=>{
-        fetchData(`products/${productId}`).then((data:unknown)=>{
+        fetchData(`products/${productId}`).then((data:any)=>{
             setProduct(data as Product)
         })
     }, [])
@@ -68,7 +65,7 @@ const ProductPage = () => {
         const hasHalfStar = rating % 1 >= 0.5;
         const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-        for (var i = 0; i < fullStars; i++) {
+        for (let i = 0; i < fullStars; i++) {
             stars.push(<Star key={`full-${i}`} size={24} fill="#FFD700" />);
         }
 
@@ -76,7 +73,7 @@ const ProductPage = () => {
             stars.push(<StarHalf key="half" size={24} fill="#FFD700" />);
         }
 
-        for (var i = 0; i < emptyStars; i++) {
+        for (let i = 0; i < emptyStars; i++) {
             stars.push(<Star key={`empty-${i}`} size={24} fill="none" />);
         }
 

@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React from 'react'
-import { product as Product } from './productCard'
 import { CartItemType } from '../cart/page'
 
 const CartItem = ({ prod }: { prod: CartItemType }) => {

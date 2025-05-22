@@ -35,7 +35,7 @@ const LoginPage = () => {
                             <Button onClick={handleLogin} className='my-5 w-full'>
                                 Login
                             </Button>
-                            <p>You don't have an account? <br /> <Link className='font-bold' href="/signup">Sign Up Here</Link> </p>
+                            <p>You don`&apos;`t have an account? <br /> <Link className='font-bold' href="/signup">Sign Up Here</Link> </p>
                             <p><br /> <Link className='font-bold' href="/seller">Become a Seller</Link> </p>
                         </form>
                     </CardContent>

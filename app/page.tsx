@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +10,6 @@ import {
 import React, { useEffect, useState, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import ProductCard, {product as Product} from "./components/productCard";
-import SearchBar from "./components/search";
 import { fetchData } from "./requests";
 import Link from "next/link";
 

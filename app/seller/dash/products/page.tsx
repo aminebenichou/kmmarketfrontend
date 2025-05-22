@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Card, CardContent } from '@/components/ui/card'
-import Image from 'next/image'
 import { useAuth } from '@/app/providers/AuthProviderClient'
 import ProductCard, { product as Product} from '@/app/components/productCard'
 import { Loader2 } from 'lucide-react'
@@ -13,7 +11,7 @@ import { Loader2 } from 'lucide-react'
 const SellerProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const {isAuthenticated, token} = useAuth()
+  const { token } = useAuth()
 
   useEffect(() => {
     const fetchProducts = async () => {

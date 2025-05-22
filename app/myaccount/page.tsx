@@ -1,14 +1,5 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import { fetchData } from "../requests";
 import { useAuth } from "../providers/AuthProviderClient";
@@ -22,7 +13,7 @@ export default function ProfilePage() {
     username:''
   });
   const [isLoading, setIsLoading] = useState(true);
-  const { isAuthenticated, token } = useAuth();
+  const {  token } = useAuth();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

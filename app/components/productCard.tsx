@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card'
-import { ShoppingCart, ShoppingCartIcon } from 'lucide-react'
+import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Category } from '../seller/dash/addProduct/page'

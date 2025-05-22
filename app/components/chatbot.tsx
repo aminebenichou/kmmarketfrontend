@@ -114,7 +114,7 @@ const ChatBot = () => {
               Chat with us
             </DialogTitle>
             <DialogDescription style={{ color: '#777', fontSize: '0.9rem' }}>
-              Posez l'une de ces questions pour commencer.
+              Posez l&apos;une de ces questions pour commencer.
             </DialogDescription>
           </DialogHeader>
 

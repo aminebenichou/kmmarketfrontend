@@ -39,7 +39,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gray-100 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Start selling today</h2>
-        <p className="mb-6 text-lg">It's free to create an account. Set up your shop in minutes.</p>
+        <p className="mb-6 text-lg">It&apos;s free to create an account. Set up your shop in minutes.</p>
         
           <Link href="/seller/signUp" className="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full hover:bg-indigo-700 transition">
             Join KMMARKET

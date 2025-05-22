@@ -29,12 +29,12 @@ type Order = {
 const SellerOrdersPage = () => {
   const [orders, setOrders] = useState<Order[]>([])
 
-  const {isAuthenticated, token} = useAuth()
+  const {token} = useAuth()
 
   useEffect(() => {
     // Replace with real API call
     const fetchOrders = async () => {
-      const data : unknown = await fetchData('orders/by-seller/', {
+      const data : any = await fetchData('orders/by-seller/', {
         headers:{
             'Authorization': `Token ${token}`
         }
@@ -47,7 +47,7 @@ const SellerOrdersPage = () => {
   }, [])
 
   const updateOrderStatus = async (id: number, newStatus: string) => {
-    const updatedOrder = await patchRequest(
+    await patchRequest(
         `orders/update-by-seller/?id=${id}`,
         {
             status: newStatus,

@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 type Tracking = {
-  order: unknown
+  order: any
   status: string | 'pending'
 }
 
@@ -25,7 +25,7 @@ const MapsTracking = () => {
   })
 
   useEffect(() => {
-    fetchData(`tracking/by-order/?tracking=${trackingNumber}`).then((data: unknown) => {
+    fetchData(`tracking/by-order/?tracking=${trackingNumber}`).then((data: any) => {
       setTracking(data)
     })
   }, [trackingNumber])
