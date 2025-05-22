@@ -16,7 +16,7 @@ const SignUpPage = () => {
 
     function handleLogin(e:any) {
         e.preventDefault()
-        signup("signUp/", data)
+        signup("client/", data)
     }
     return (
         <div>
