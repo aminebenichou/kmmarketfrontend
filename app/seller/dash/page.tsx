@@ -22,7 +22,7 @@ const SellerDashboardPage = () => {
                             <CardTitle>Total Sales</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-2xl font-semibold">$2,450</p>
+                            <p className="text-2xl font-semibold">2,450 DZD</p>
                         </CardContent>
                     </Card>
                     <Card>

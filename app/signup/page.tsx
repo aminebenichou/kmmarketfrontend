@@ -18,6 +18,7 @@ const SignUpPage = () => {
         e.preventDefault()
         signup("client/", data)
     }
+    
     return (
         <div>
             <center>

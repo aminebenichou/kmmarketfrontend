@@ -83,8 +83,8 @@ const AddProductPage = () => {
     const body = new FormData()
     body.append('title', formData.title)
     body.append('description', formData.description)
-    // body.append('price', parseInt(formData.price))
-    // body.append('category', selectedCategories[0])
+    body.append('price', formData.price.toString())
+    body.append('category', selectedCategories[0].toString())
   
     if (image) {
       body.append('image', image)
@@ -102,7 +102,7 @@ const AddProductPage = () => {
     console.log(data);
     
     // Send the request
-    const res = await postData("products/", data)
+    const res = await postData("products/", body, "multipart/form-data")
   
     if (res) {
       router.push('/seller/dash')

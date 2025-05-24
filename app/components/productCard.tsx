@@ -4,6 +4,7 @@ import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Category } from '../seller/dash/addProduct/page'
+// import Image from 'next/image'
 
 export type Seller = {
     username: string;
@@ -34,7 +35,7 @@ const ProductCard = ({ data }: { data: product }) => {
             <Link href={data?.id.toString() || ""}>
                 <Card className='hover:shadow-xl'>
                     <CardContent className='w-64 h-72 py-5 flex flex-col justify-start items-center'>
-                        <img className='max-w-2/3 mb-5' src={data.image} alt="" />
+                        <img className='max-w-2/3 mb-5 w-1/2 h-1/2' src={data.image ?? ""} alt="" />
                         <CardTitle className='my-2'>
                             {data.title}
                         </CardTitle>

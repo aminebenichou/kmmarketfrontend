@@ -6,14 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Box, CircleArrowOutUpLeftIcon, LucideProps, MessageCircleIcon, Phone, ShoppingCart, Star, StarHalf, Truck } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import ProductCard, { product as Product } from '../components/productCard'
-import { Select, SelectContent, SelectGroup, SelectItem,  SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { fetchData, postData } from '../requests'
 import { useParams } from 'next/navigation'
+import { wilayas, communes } from "@/lib/importantVars";
 
-
-
-const IconWithText = ({Icon, text}:{Icon:React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>, text:string})=>{
-    return(
+const IconWithText = ({ Icon, text }: { Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>, text: string }) => {
+    return (
         <div className="flex items-center space-x-2">
             {
                 <Icon />
@@ -26,38 +25,37 @@ const IconWithText = ({Icon, text}:{Icon:React.ForwardRefExoticComponent<Omit<Lu
 const ProductPage = () => {
     const params = useParams()
     const productId = params.product
-    
-    const wilayas = [
-        { id: 1, name: "wilaya1" },
-        { id: 2, name: "wilaya2" },
-        { id: 3, name: "wilaya3" },
-    ]
-    const communes = [
-        { id: 1, name: "commune1" },
-        { id: 2, name: "commune2" },
-        { id: 3, name: "commune3" },
-    ]
-    const suggestedProducts = [
-        {
-            id: "1",
-            image: "./1.jpg",
-            title: "test Product",
-            price: 15000,
-            rating: 5.5,
-            description: "string",
-            category: "string",
-            seller: {
-                username:''
-            },
-            sale: false,
-        },
-        
-    ]
+
+    // const wilayas = [
+    //     { id: 1, name: "wilaya1" },
+    //     { id: 2, name: "wilaya2" },
+    //     { id: 3, name: "wilaya3" },
+    // ]
+    // const communes = [
+    //     { id: 1, name: "commune1" },
+    //     { id: 2, name: "commune2" },
+    //     { id: 3, name: "commune3" },
+    // ]
+
+    const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([])
     const [product, setProduct] = useState<Product>()
-    useEffect(()=>{
-        fetchData(`products/${productId}`).then((data:any)=>{
+    const [shippingCompanies, setShippingCompanies] = useState([
+        'Yalidine',
+        'ZR Express'
+    ])
+    const [orderData, setOrderData] = useState<any>({
+        products: [],
+        commune: '',
+        wilaya: '',
+        company: ''
+    })
+    useEffect(() => {
+        fetchData(`products/${productId}`).then((data: any) => {
             setProduct(data as Product)
         })
+        fetchData(`products/`).then((data: any) => setSuggestedProducts(data))
+        setOrderData({ ...orderData, products: productId })
+
     }, [])
     const displayRating = (rating: number) => {
         const stars = [];
@@ -80,10 +78,11 @@ const ProductPage = () => {
         return stars;
     };
 
+
     function createOrder() {
-        postData("orders/", {
-            products: [productId],
-        })
+        console.log(orderData);
+        
+        postData("orders/", orderData)
     }
 
     return (
@@ -110,7 +109,9 @@ const ProductPage = () => {
                                 displayRating(product?.rating || 0)
                             }
                         </div>
-                        <Button onClick={createOrder} className='my-10 cursor-pointer'>
+                        <Button onClick={() => {
+                            createOrder()
+                        }} className='my-10 cursor-pointer'>
                             <ShoppingCart /> Add To Cart
                         </Button>
                         <div className='my-5 flex'>
@@ -150,7 +151,7 @@ const ProductPage = () => {
                         <CardHeader>
                             <CardTitle>You Might Also Like</CardTitle>
                         </CardHeader>
-                        <CardContent className='flex justify-evenly items-center'>
+                        <CardContent className='flex flex-wrap justify-evenly items-center'>
                             {suggestedProducts.map((product, index) =>
                                 <ProductCard data={product} key={index} />
                             )}
@@ -175,7 +176,9 @@ const ProductPage = () => {
                                 <SelectGroup>
                                     {
                                         wilayas.map((wilaya, index) => (
-                                            <SelectItem key={index} value={wilaya.name}> {wilaya.name} </SelectItem>
+                                            <SelectItem key={index} onSelect={() => {
+                                                setOrderData({ ...orderData, wilaya: wilaya.name })
+                                            }} value={wilaya.name}> {wilaya.name} </SelectItem>
                                         ))
                                     }
 
@@ -191,7 +194,29 @@ const ProductPage = () => {
                                 <SelectGroup>
                                     {
                                         communes.map((commune, index) => (
-                                            <SelectItem key={index} value={commune.name}> {commune.name} </SelectItem>
+                                            <SelectItem key={index} onSelect={() => {
+                                                setOrderData({ ...orderData, commune: commune })
+                                            }} value={commune as string}> {commune} </SelectItem>
+                                        ))
+                                    }
+
+
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                        <br />
+
+                        <Select>
+                            <SelectTrigger className="w-[280px]">
+                                <SelectValue placeholder="Select a Shipping Company" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {
+                                        shippingCompanies.map((company, index) => (
+                                            <SelectItem key={index} onSelect={() => {
+                                                setOrderData({ ...orderData, company: company })
+                                            }} value={company as string}> {company} </SelectItem>
                                         ))
                                     }
 
@@ -201,11 +226,11 @@ const ProductPage = () => {
                         </Select>
 
                         <div className='my-5'>
-                                    <IconWithText Icon={Truck} text={'Shipping Fee To home is : \n  ' + product?.shippingToHome?.toString()  + 'DZD'}  />
-                                    <br />
-                                    <IconWithText Icon={Box} text={'Shipping Fee To Office is : \n  ' + product?.shippingToOffice?.toString()  + 'DZD'}  />
-                                    <br />
-                                    <IconWithText Icon={CircleArrowOutUpLeftIcon} text={'Return is Free before 7 days'}  />
+                            <IconWithText Icon={Truck} text={'Shipping Fee To home is : \n  ' + 1000 + ' DZD'} />
+                            <br />
+                            <IconWithText Icon={Box} text={'Shipping Fee To Office is : \n  ' + 600 + ' DZD'} />
+                            <br />
+                            <IconWithText Icon={CircleArrowOutUpLeftIcon} text={'Return is Free before 7 days'} />
                         </div>
                     </CardContent>
                 </Card>

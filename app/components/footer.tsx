@@ -38,7 +38,8 @@ const Footer = () => {
 
                     <div className='flex justify-startitems-center my-10'>
                         <Link className='mr-10 font-bold' href='/seller'>Become a Seller</Link>
-                        <Link className='mr-10 font-bold' href='/seller/subscriptions'>Advertise</Link>
+                        <Link className='mr-10 font-bold' href='/seller/subscriptions'>KM PRO</Link>
+                        <Link className='mr-10 font-bold' href='/seller/dash'>Seller Dashboard</Link>
                     </div>
                 </div>
             </div>

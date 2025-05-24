@@ -4,8 +4,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 
 
-const mainUrl = "https://aminebenichou.pythonanywhere.com/"
-// const mainUrl = "http://127.0.0.1:8000/"
+// const mainUrl = "https://aminebenichou.pythonanywhere.com/"
+const mainUrl = "http://127.0.0.1:8000/"
 
 // ✅ Helper to get token from cookies
 const getToken = async (): Promise<string | undefined> => {
@@ -117,18 +117,21 @@ export async function signup<TRequest, TResponse>(
 // ✅ POST with token
 export async function postData<TRequest, TResponse>(
   url: string,
-  data: TRequest,
+  data: any,
   contentType: string = 'application/json'
 ): Promise<TResponse> {
   const token = await getToken();
+  console.log(typeof data);
 
+  
+  
   try {
     const response: AxiosResponse<TResponse> = await axios.post(
       `${mainUrl}${url}`,
       data,
       {
         headers: {
-          'Content-Type': contentType,
+          'Content-Type': `${contentType}`,
           Authorization: `Token ${token}`,
         },
       }

@@ -15,8 +15,15 @@ const nextConfig: NextConfig = {
         hostname: 'maps.googleapis.com',
         pathname: '/maps/api/staticmap/**',
       },
+      
     ],
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
+  },
 };
+
 
 export default nextConfig;

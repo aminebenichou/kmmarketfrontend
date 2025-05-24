@@ -19,7 +19,7 @@ const Subscribe = () => {
         {
             name: 'KM Publicite',
             price: '2500',
-            period: 'month',
+            period: 'Publicité',
             features: [
                 '✔️ 1 Publicité boostée',
                 '✔️ Mise en avant de l’annonce pendant 7 jours',
