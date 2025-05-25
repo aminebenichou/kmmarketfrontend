@@ -4,8 +4,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 
 
-// const mainUrl = "https://aminebenichou.pythonanywhere.com/"
-const mainUrl = "http://127.0.0.1:8000/"
+const mainUrl = "https://aminebenichou.pythonanywhere.com/"
+// const mainUrl = "http://127.0.0.1:8000/"
 
 // ✅ Helper to get token from cookies
 const getToken = async (): Promise<string | undefined> => {
